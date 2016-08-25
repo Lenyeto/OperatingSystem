@@ -1,8 +1,8 @@
 
 
 #use these for Windows
-CC=/cygdrive/c/Program Files (x86)/GNU Tools ARM Embedded/5.3 2016q1/bin/arm-none-eabi-gcc.exe
-LD=/cygdrive/c/Program Files (x86)/GNU Tools ARM Embedded/5.3 2016q1/bin/arm-none-eabi-ld.exe
+CC=/cygdrive/c/GNUToolsARMEmbedded/5.3_2016q1/bin/arm-none-eabi-gcc.exe
+LD=/cygdrive/c/GNUToolsARMEmbedded/5.3_2016q1/bin/arm-none-eabi-ld.exe
 AS=$(CC)
 OBJCOPY=/cygdrive/c/gcc-arm-none-eabi-5_3-2016q1-20160330-win32/bin/arm-none-eabi-objcopy.exe
 QEMU=/cygdrive/c/qemu/qemu-system-arm.exe

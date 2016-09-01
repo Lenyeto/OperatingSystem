@@ -1,0 +1,27 @@
+Console.c
+	#define ~~~
+	
+	void console_init() {
+		Stuff
+		
+	}
+	
+	void setpixel(int x, int y, short color) {
+	
+	}
+	
+kernelc.c
+	#include "console.h"
+	void kmain(){
+		console_init()
+		//draw->setpixel
+		
+		while() {
+			For drawing probably
+		}
+
+console.h
+	#define COLOR16(~~~~~)~~~~
+	#define COLOR16(r,g,b) ((b>>3)|((r>>3)<<11)|((g>>2)<<5))
+	void console_init();
+	void setpixel(int x, int y, short c);

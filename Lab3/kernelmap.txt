@@ -17,15 +17,18 @@ Linker script and memory map
                 0x00010000                stext = .
  *(.text)
  .text          0x00010000       0x10 kernelasm.o
- .text          0x00010010       0x14 kernelc.o
+ .text          0x00010010       0x34 kernelc.o
                 0x00010010                kmain
- .text          0x00010024        0x0 console.o
+ .text          0x00010044      0x1f8 console.o
+                0x00010044                console_init
+                0x000100ac                setpixel
+                0x00010104                drawbox
  *(.rodata)
  *(.rdata)
  *(.rdata$zzz)
-                0x00010024                etext = .
+                0x0001023c                etext = .
                 0x00011000                . = ALIGN (ABSOLUTE (.), 0x1000)
- *fill*         0x00010024      0xfdc 
+ *fill*         0x0001023c      0xdc4 
                 0x00011000                _sdata = .
                 0x00011000                sdata = .
  *(.data)

@@ -1,8 +1,7 @@
+#define COLOR16(r,g,b) ((b>>3) | ((r>>3)<<11) | ((g>>2)<<5))
+
 #define WIDTH 800
 #define HEIGHT 600
-
-#define COLOR16(r, g, b) ((r>>3) | ((b>>3) << 11) | ((g >> 2) << 5))
-#define framebuffer ((volatile unsigned short*) (((0x07ffffff - WIDTH*HEIGHT*2))&~0xf))
 
 #define pl110 ( (volatile unsigned*)0xc0000000 )
 #define haxis       (*(pl110+0))    //offset 0: horizontal axis                             
@@ -12,10 +11,22 @@
 #define baseaddr1   (*(pl110+4))    //offset 16: upper panel base address                           
 #define baseaddr2   (*(pl110+5))    //offset 20: lower panel base address
 #define intmask     (*(pl110+6))    //offset 24: interrupt mask
-#define params      (*(pl110+7))    //offset 28: panel parameters 
+#define params      (*(pl110+7))    //offset 28: panel parameters   
 
 
 
-void console_init();
-void setpixel(int x, int y, unsigned short color);
-void drawbox(int x, int y, int width, int height, unsigned short color);
+ldr sp,=stack
+b kmain
+
+forever:
+    b forever
+
+
+.section .data
+
+.global stack
+    .rept 1024
+    .word 0
+    .endr
+stack:
+    

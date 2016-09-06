@@ -25,3 +25,23 @@ console.h
 	#define COLOR16(r,g,b) ((b>>3)|((r>>3)<<11)|((g>>2)<<5))
 	void console_init();
 	void setpixel(int x, int y, short c);
+	
+	
+	
+void console_putc(char c) {
+	static int row;
+	static int col;
+	if (c == '\n') {
+		row += CHAR_HEIGHT;
+	} else {
+		if (col * CHAR_WIDTH + CHAR_WIDTH > WIDTH) {
+			row += CHAR_HEIGHT;
+		}
+		draw_char(col, row, c);
+		col += CHAR_WIDTH;
+	}
+}
+
+draw char (int col, int row, char c) {
+	
+}

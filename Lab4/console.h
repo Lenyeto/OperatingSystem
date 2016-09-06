@@ -19,3 +19,4 @@
 void console_init();
 void setpixel(int x, int y, unsigned short color);
 void drawbox(int x, int y, int width, int height, unsigned short color);
+void console_draw_character(int x, int y, unsigned int color, char c);

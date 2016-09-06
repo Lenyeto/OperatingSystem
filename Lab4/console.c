@@ -1,5 +1,5 @@
 #include "console.h"
-
+#include "font.h"
 
 void console_init() {
 	//this is just so we know we've gotten here
@@ -30,5 +30,15 @@ void drawbox(int x, int y, int width, int height, unsigned short color) {
 			}
 		}
 		
+	}
+}
+
+void console_draw_character(int x, int y, unsigned int color, char c) {
+	for (int i = 0; i < CHAR_WIDTH; i++) {
+		for (int j = 0; j < CHAR_HEIGHT; j++) {
+			if (font_data[(int) c][j] >> i & 1) {
+				setpixel(x - i + CHAR_WIDTH, y + j, COLOR16(255, 255, 255));
+			}
+		}
 	}
 }

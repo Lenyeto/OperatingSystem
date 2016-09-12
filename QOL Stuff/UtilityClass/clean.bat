@@ -1,0 +1,1 @@
+del *.o *.bin *.tmp /s /q /f 

@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\cygwin_bash]
+@="OS: Open Cygwin Here"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\cygwin_bash\command]
+@="C:\\rhcygwin64\\bin\\mintty.exe -e /bin/xhere /bin/bash.exe"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\os_clean]
+@="OS: Clean Folder"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\os_clean\command]
+@="C:\\UtilityClass\\clean.bat \"%V\""

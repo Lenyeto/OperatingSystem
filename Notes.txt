@@ -20,6 +20,7 @@ kernelc.c
 			For drawing probably
 		}
 
+	}
 console.h
 	#define COLOR16(~~~~~)~~~~
 	#define COLOR16(r,g,b) ((b>>3)|((r>>3)<<11)|((g>>2)<<5))
@@ -45,3 +46,73 @@ void console_putc(char c) {
 draw char (int col, int row, char c) {
 	
 }
+
+int printf(char *fmt, ...);
+
+int printf(char *ftm, ...) {
+	va_list v;
+	va_start(v, fmt);
+	...
+	loop{
+		if (percent_d) {
+			int x;
+			x = va_arg(v, int);
+			...
+		}
+		else if (percent_f) {
+			double f;
+			f = va_arg(v, double)'
+			...
+		}
+	}
+	
+}
+
+
+stdarg.h
+________
+#pragma once
+
+typedef struct va_list_ {
+	void* current;
+	
+} va_list;
+
+#define va_start(v, arg)\
+	v.current = ((char*)&arg+sizeof(arg))
+#define va_end(v)
+#define va_arg(v, t) *((t*)va_arg_(&v, sizeof(t)))
+	
+	
+static void * va_arg_(va_list*v, int sz) {
+	void xtmp = v->curent;
+	v->current+=sz;
+	return tmp;
+}
+
+__________
+
+void kmemcpy(void *d, void *s, int n) {
+	while (n--) {
+		*(((char*) d)++) = *(((char*) s)++);
+		//*((char*) d) = *((char*) s);
+		//((char*)d)+=1;
+		//((char*)s)+=1;
+	}
+}
+
+void kmemset(void *p, char c, int n) {
+	while (n--) {
+		*(((char*) p)++) = c;
+	}
+}
+
+void debugout(char x) {
+	while ((int serialflags) & 32) {
+		;
+	}
+	*serialport = x;
+}
+//using kmemcpy and kmemset for the frame buffer
+kmemcpy(framebuffer, framebuffer+CHAR_HEIGHT*WIDTH, WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2);
+kmemset(framebuffer, 

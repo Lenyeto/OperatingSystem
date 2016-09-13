@@ -18,9 +18,11 @@
 int console_pos_x;
 int console_pos_y;
 
+unsigned int curColor;
 
 void console_init();
 void setpixel(int x, int y, unsigned short color);
 void drawbox(int x, int y, int width, int height, unsigned short color);
 void console_draw_character(int x, int y, unsigned int color, char c);
 void console_putc(char c);
+void console_clear();

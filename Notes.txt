@@ -116,3 +116,13 @@ void debugout(char x) {
 //using kmemcpy and kmemset for the frame buffer
 kmemcpy(framebuffer, framebuffer+CHAR_HEIGHT*WIDTH, WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2);
 kmemset(framebuffer, 
+
+create
+sd.c
+disk.c
+
+disk.h
+#pragma once
+void disk_init();
+
+

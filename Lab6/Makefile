@@ -39,7 +39,7 @@ all:
 	$(CC) kernelc.c
 	$(CC) console.c
 	$(CC) kprintf.c
-	$(LD) -o kernel.tmp kernelasm.o kernelc.o console.o
+	$(LD) -o kernel.tmp kernelasm.o kernelc.o console.o kprintf.o
 	$(OBJCOPY) -Obinary kernel.tmp kernel.bin
 	$(QEMU) $(QEMUARGS) kernel.bin
 	

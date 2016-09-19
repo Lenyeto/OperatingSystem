@@ -93,7 +93,7 @@ void console_putc(char x) {
 	if (console_pos_y > 34 * CHAR_HEIGHT) {
 		console_pos_y -= CHAR_HEIGHT;
 		kmemcpy((void *)framebuffer, (void *)(framebuffer) + CHAR_HEIGHT*WIDTH, WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2);
-		//kmemset(*(framebuffer + , (char) 0, WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2);
+		kmemset((void *)framebuffer + WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2, (char) 0, WIDTH*HEIGHT*2 - WIDTH*CHAR_HEIGHT*2);
 	}
 }
 

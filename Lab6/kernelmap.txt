@@ -1,4 +1,11 @@
 
+Allocating common symbols
+Common symbol       size              file
+
+console_pos_y       0x4               kernelc.o
+curColor            0x4               kernelc.o
+console_pos_x       0x4               kernelc.o
+
 Discarded input sections
 
  .comment       0x00000000       0x6f kernelc.o
@@ -13,24 +20,29 @@ Linker script and memory map
 
                 0x00010000                . = 0x10000
 
-.text           0x00010000     0x5404
+.text           0x00010000     0x5410
                 0x00010000                stext = .
  *(.text)
  .text          0x00010000       0x10 kernelasm.o
- .text          0x00010010       0x60 kernelc.o
+ .text          0x00010010       0x80 kernelc.o
                 0x00010010                kmain
- .text          0x00010070      0x2dc console.o
-                0x00010070                console_init
-                0x000100d8                setpixel
-                0x00010130                drawbox
-                0x00010268                console_draw_character
+ .text          0x00010090      0x6d4 console.o
+                0x00010090                console_init
+                0x0001012c                setpixel
+                0x00010184                console_box
+                0x000102bc                console_draw_character
+                0x000103d0                console_putc
+                0x000105e4                console_clear
+                0x00010648                kmemset
+                0x000106a4                kmemcpy
+                0x0001070c                debugout
  *(.rodata)
- .rodata        0x0001034c      0xfde kernelc.o
+ .rodata        0x00010764      0xfde kernelc.o
  *(.rdata)
  *(.rdata$zzz)
-                0x0001132a                etext = .
+                0x00011742                etext = .
                 0x00012000                . = ALIGN (ABSOLUTE (.), 0x1000)
- *fill*         0x0001132a      0xcd6 
+ *fill*         0x00011742      0x8be 
                 0x00012000                _sdata = .
                 0x00012000                sdata = .
  *(.data)
@@ -44,33 +56,37 @@ Linker script and memory map
                 0x00015404                _sbss = .
                 0x00015404                sbss = .
  *(COMMON)
+ COMMON         0x00015404        0xc kernelc.o
+                0x00015404                console_pos_y
+                0x00015408                curColor
+                0x0001540c                console_pos_x
  *(.bss)
- .bss           0x00015404        0x0 kernelasm.o
- .bss           0x00015404        0x0 kernelc.o
- .bss           0x00015404        0x0 console.o
-                0x00015404                _ebss = .
-                0x00015404                ebss = .
+ .bss           0x00015410        0x0 kernelasm.o
+ .bss           0x00015410        0x0 kernelc.o
+ .bss           0x00015410        0x0 console.o
+                0x00015410                _ebss = .
+                0x00015410                ebss = .
 
-.glue_7         0x00015404        0x0
- .glue_7        0x00015404        0x0 linker stubs
+.glue_7         0x00015410        0x0
+ .glue_7        0x00015410        0x0 linker stubs
 
-.glue_7t        0x00015404        0x0
- .glue_7t       0x00015404        0x0 linker stubs
+.glue_7t        0x00015410        0x0
+ .glue_7t       0x00015410        0x0 linker stubs
 
-.vfp11_veneer   0x00015404        0x0
- .vfp11_veneer  0x00015404        0x0 linker stubs
+.vfp11_veneer   0x00015410        0x0
+ .vfp11_veneer  0x00015410        0x0 linker stubs
 
-.v4_bx          0x00015404        0x0
- .v4_bx         0x00015404        0x0 linker stubs
+.v4_bx          0x00015410        0x0
+ .v4_bx         0x00015410        0x0 linker stubs
 
-.iplt           0x00015404        0x0
- .iplt          0x00015404        0x0 kernelasm.o
+.iplt           0x00015410        0x0
+ .iplt          0x00015410        0x0 kernelasm.o
 
-.igot.plt       0x00015404        0x0
- .igot.plt      0x00015404        0x0 kernelasm.o
+.igot.plt       0x00015410        0x0
+ .igot.plt      0x00015410        0x0 kernelasm.o
 
-.rel.dyn        0x00015404        0x0
- .rel.iplt      0x00015404        0x0 kernelasm.o
+.rel.dyn        0x00015410        0x0
+ .rel.iplt      0x00015410        0x0 kernelasm.o
 
 /DISCARD/
  *(.eh_frame)

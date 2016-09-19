@@ -63,7 +63,7 @@ const char* decl =
 
 void kmain(){
     console_init();
-    console_box( 20,40,100,200 );
+    console_box( 20,40,100,200, COLOR16(200, 200, 0));
     kprintf("%s",decl);
     kprintf("%d %d %d %d %d %d",42,43,44,45,46,47);
     while(1){

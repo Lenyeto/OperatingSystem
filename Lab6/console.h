@@ -13,10 +13,20 @@
 #define baseaddr2   (*(pl110+5))    //offset 20: lower panel base address
 #define intmask     (*(pl110+6))    //offset 24: interrupt mask
 #define params      (*(pl110+7))    //offset 28: panel parameters 
+//#define serialport ( (volatile unsigned*) 0x16000000 )
+//#define serialflags ( (volatile unsigned*) 0x16000018 )
 
+int console_pos_x;
+int console_pos_y;
 
+unsigned int curColor;
 
 void console_init();
 void setpixel(int x, int y, unsigned short color);
-void drawbox(int x, int y, int width, int height, unsigned short color);
+void console_box(int x, int y, int width, int height, unsigned short color);
 void console_draw_character(int x, int y, unsigned int color, char c);
+void console_putc(char c);
+void console_clear();
+void debugout(char x);
+void kmemcpy(void *d, void *s, int n);
+void kmemset(void *p, char c, int n);

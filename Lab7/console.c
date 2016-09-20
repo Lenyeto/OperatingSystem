@@ -2,6 +2,8 @@
 #include "font.h"
 
 void console_init() {
+	//this is just so we know we've gotten here
+    //asm("ldr r0,=0x1234");
 	baseaddr1 = (unsigned int) framebuffer;
 	haxis=0x3f1f3f00 | (WIDTH/4 - 4);
 	vaxis=0x80b6000 | (HEIGHT - 1);
@@ -13,8 +15,6 @@ void console_init() {
 	
 	curColor = COLOR16(255, 255, 255);
 }
-
-
 
 void setpixel(int x, int y, unsigned short color) {
 	framebuffer[y*WIDTH+x] = color;

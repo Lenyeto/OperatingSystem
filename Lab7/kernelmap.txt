@@ -11,6 +11,7 @@ Discarded input sections
  .comment       0x00000000       0x6f kernelc.o
  .comment       0x00000000       0x6f console.o
  .comment       0x00000000       0x6f kprintf.o
+ .comment       0x00000000       0x6f disk.o
 
 Memory Configuration
 
@@ -25,30 +26,34 @@ Linker script and memory map
                 0x00010000                stext = .
  *(.text)
  .text          0x00010000       0x10 kernelasm.o
- .text          0x00010010       0x80 kernelc.o
+ .text          0x00010010       0xe4 kernelc.o
                 0x00010010                kmain
- .text          0x00010090      0x724 console.o
-                0x00010090                console_init
-                0x0001012c                setpixel
-                0x00010184                console_box
-                0x000102bc                console_draw_character
-                0x000103d0                console_putc
-                0x00010634                console_clear
-                0x00010698                kmemset
-                0x000106f4                kmemcpy
-                0x0001075c                debugout
- .text          0x000107b4     0x126c kprintf.o
-                0x000108dc                kprintf
-                0x00010924                ksprintf
+ .text          0x000100f4      0x724 console.o
+                0x000100f4                console_init
+                0x00010190                setpixel
+                0x000101e8                console_box
+                0x00010320                console_draw_character
+                0x00010434                console_putc
+                0x00010698                console_clear
+                0x000106fc                kmemset
+                0x00010758                kmemcpy
+                0x000107c0                debugout
+ .text          0x00010818     0x126c kprintf.o
+                0x00010940                kprintf
+                0x00010988                ksprintf
+ .text          0x00011a84      0x314 disk.o
+                0x00011a84                disk_init
+                0x00011b64                isBusy
+                0x00011b8c                disk_read_sector
+                0x00011c94                disk_write_sector
  *(.rodata)
- .rodata        0x00011a20      0xfde kernelc.o
- *fill*         0x000129fe        0x2 
- .rodata        0x00012a00       0x68 kprintf.o
+ .rodata        0x00011d98      0x210 kernelc.o
+ .rodata        0x00011fa8       0x68 kprintf.o
  *(.rdata)
  *(.rdata$zzz)
-                0x00012a68                etext = .
+                0x00012010                etext = .
                 0x00013000                . = ALIGN (ABSOLUTE (.), 0x1000)
- *fill*         0x00012a68      0x598 
+ *fill*         0x00012010      0xff0 
                 0x00013000                _sdata = .
                 0x00013000                sdata = .
  *(.data)
@@ -58,6 +63,7 @@ Linker script and memory map
                 0x00014000                decl
  .data          0x00014004     0x2400 console.o
  .data          0x00016404        0x0 kprintf.o
+ .data          0x00016404        0x0 disk.o
                 0x00016404                _edata = .
                 0x00016404                edata = .
                 0x00016404                _sbss = .
@@ -72,6 +78,7 @@ Linker script and memory map
  .bss           0x00016410        0x0 kernelc.o
  .bss           0x00016410        0x0 console.o
  .bss           0x00016410        0x0 kprintf.o
+ .bss           0x00016410        0x0 disk.o
                 0x00016410                _ebss = .
                 0x00016410                ebss = .
 
@@ -103,6 +110,7 @@ LOAD kernelasm.o
 LOAD kernelc.o
 LOAD console.o
 LOAD kprintf.o
+LOAD disk.o
 OUTPUT(kernel.tmp elf32-littlearm)
 
 .ARM.attributes
@@ -115,3 +123,5 @@ OUTPUT(kernel.tmp elf32-littlearm)
                 0x00000054       0x32 console.o
  .ARM.attributes
                 0x00000086       0x32 kprintf.o
+ .ARM.attributes
+                0x000000b8       0x32 disk.o

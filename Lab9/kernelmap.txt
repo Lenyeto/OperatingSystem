@@ -1,0 +1,149 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+b                   0x200             kernelc.o
+superblock          0x400             file.o
+block_buffer        0x1000            file.o
+
+Discarded input sections
+
+ .comment       0x00000000       0x6f kernelc.o
+ .comment       0x00000000       0x6f console.o
+ .comment       0x00000000       0x6f kprintf.o
+ .comment       0x00000000       0x6f util.o
+ .comment       0x00000000       0x6f disk.o
+ .comment       0x00000000       0x6f file.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00010000                . = 0x10000
+
+.text           0x00010000     0x7a0c
+                0x00010000                stext = .
+ *(.text)
+ .text          0x00010000        0xc kernelasm.o
+                0x00010000                start
+ .text          0x0001000c       0x2c kernelc.o
+                0x0001000c                kmain
+ .text          0x00010038      0x50c console.o
+                0x00010038                console_init
+                0x000100a0                set_pixel
+                0x000100f8                console_box
+                0x000101f8                console_set_pixel
+                0x00010250                console_draw_character
+                0x0001034c                console_putc
+ .text          0x00010544     0x12f0 kprintf.o
+                0x00010580                va_end
+                0x000106c8                kprintf
+                0x00010724                ksprintf
+ .text          0x00011834      0x118 util.o
+                0x00011834                kmemcpy
+                0x000118b0                kmemset
+                0x00011918                memcpy
+ .text          0x0001194c      0x3a8 disk.o
+                0x0001194c                isBusy
+                0x00011974                disk_init
+                0x00011a70                disk_read_sector
+                0x00011b78                disk_read_sectors
+                0x00011bf0                disk_write_sector
+ .text          0x00011cf4      0x2a8 file.o
+                0x00011cf4                read_block
+                0x00011d2c                file_init
+ *(.rodata)
+ .rodata        0x00011f9c       0x68 kprintf.o
+ .rodata        0x00012004        0x7 disk.o
+ *fill*         0x0001200b        0x1 
+ .rodata        0x0001200c       0x98 file.o
+ *(.rdata)
+ *(.rdata$zzz)
+                0x000120a4                etext = .
+                0x00013000                . = ALIGN (ABSOLUTE (.), 0x1000)
+ *fill*         0x000120a4      0xf5c 
+                0x00013000                _sdata = .
+                0x00013000                sdata = .
+ *(.data)
+ .data          0x00013000     0x1000 kernelasm.o
+                0x00014000                stack
+ .data          0x00014000        0x0 kernelc.o
+ .data          0x00014000     0x2404 console.o
+                0x00014000                font_data
+ .data          0x00016404        0x0 kprintf.o
+ .data          0x00016404        0x0 util.o
+ .data          0x00016404        0x0 disk.o
+ .data          0x00016404        0x0 file.o
+                0x00016404                _edata = .
+                0x00016404                edata = .
+                0x00016404                _sbss = .
+                0x00016404                sbss = .
+ *(COMMON)
+ COMMON         0x00016404      0x200 kernelc.o
+                0x00016404                b
+ COMMON         0x00016604     0x1400 file.o
+                0x00016604                superblock
+                0x00016a04                block_buffer
+ *(.bss)
+ .bss           0x00017a04        0x0 kernelasm.o
+ .bss           0x00017a04        0x0 kernelc.o
+ .bss           0x00017a04        0x8 console.o
+ .bss           0x00017a0c        0x0 kprintf.o
+ .bss           0x00017a0c        0x0 util.o
+ .bss           0x00017a0c        0x0 disk.o
+ .bss           0x00017a0c        0x0 file.o
+                0x00017a0c                _ebss = .
+                0x00017a0c                ebss = .
+
+.glue_7         0x00017a0c        0x0
+ .glue_7        0x00017a0c        0x0 linker stubs
+
+.glue_7t        0x00017a0c        0x0
+ .glue_7t       0x00017a0c        0x0 linker stubs
+
+.vfp11_veneer   0x00017a0c        0x0
+ .vfp11_veneer  0x00017a0c        0x0 linker stubs
+
+.v4_bx          0x00017a0c        0x0
+ .v4_bx         0x00017a0c        0x0 linker stubs
+
+.iplt           0x00017a0c        0x0
+ .iplt          0x00017a0c        0x0 kernelasm.o
+
+.igot.plt       0x00017a0c        0x0
+ .igot.plt      0x00017a0c        0x0 kernelasm.o
+
+.rel.dyn        0x00017a0c        0x0
+ .rel.iplt      0x00017a0c        0x0 kernelasm.o
+
+/DISCARD/
+ *(.eh_frame)
+ *(.comment)
+LOAD kernelasm.o
+LOAD kernelc.o
+LOAD console.o
+LOAD kprintf.o
+LOAD util.o
+LOAD disk.o
+LOAD file.o
+OUTPUT(kernel.tmp elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 kernelasm.o
+ .ARM.attributes
+                0x00000022       0x32 kernelc.o
+ .ARM.attributes
+                0x00000054       0x32 console.o
+ .ARM.attributes
+                0x00000086       0x32 kprintf.o
+ .ARM.attributes
+                0x000000b8       0x32 util.o
+ .ARM.attributes
+                0x000000ea       0x32 disk.o
+ .ARM.attributes
+                0x0000011c       0x32 file.o

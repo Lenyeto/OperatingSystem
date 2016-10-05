@@ -24,52 +24,49 @@ Linker script and memory map
 
                 0x00010000                . = 0x10000
 
-.text           0x00010000     0x82cc
+.text           0x00010000     0x7a0c
                 0x00010000                stext = .
  *(.text)
  .text          0x00010000       0x34 kernelasm.o
                 0x00010000                start
- .text          0x00010034       0x2c kernelc.o
+ .text          0x00010034      0x170 kernelc.o
                 0x00010034                kmain
- .text          0x00010060      0x50c console.o
-                0x00010060                console_init
-                0x000100c8                set_pixel
-                0x00010120                console_box
-                0x00010220                console_set_pixel
-                0x00010278                console_draw_character
-                0x00010374                console_putc
- .text          0x0001056c     0x12f0 kprintf.o
-                0x000105a8                va_end
-                0x000106f0                kprintf
-                0x0001074c                ksprintf
- .text          0x0001185c      0x268 util.o
-                0x0001185c                kmemcpy
-                0x000118d8                kmemset
-                0x00011940                memcpy
-                0x00011974                kdivmod
-                0x00011a54                kdiv
-                0x00011a8c                kmod
- .text          0x00011ac4      0x3a8 disk.o
-                0x00011ac4                isBusy
-                0x00011aec                disk_init
-                0x00011be8                disk_read_sector
-                0x00011cf0                disk_read_sectors
-                0x00011d68                disk_write_sector
- .text          0x00011e6c      0x3d8 file.o
-                0x00011e6c                read_block
-                0x00011ea4                file_init
-                0x00012114                file_open
-                0x000121a0                file_close
+ .text          0x000101a4      0x50c console.o
+                0x000101a4                console_init
+                0x0001020c                set_pixel
+                0x00010264                console_box
+                0x00010364                console_set_pixel
+                0x000103bc                console_draw_character
+                0x000104b8                console_putc
+ .text          0x000106b0     0x12f0 kprintf.o
+                0x000106ec                va_end
+                0x00010834                kprintf
+                0x00010890                ksprintf
+ .text          0x000119a0      0x234 util.o
+                0x000119a0                kmemcpy
+                0x00011a1c                kmemset
+                0x00011a84                kdivmod
+                0x00011b64                kdiv
+                0x00011b9c                kmod
+ .text          0x00011bd4      0x3a8 disk.o
+                0x00011bd4                isBusy
+                0x00011bfc                disk_init
+                0x00011cf8                disk_read_sector
+                0x00011e00                disk_read_sectors
+                0x00011e78                disk_write_sector
+ .text          0x00011f7c       0xf8 file.o
+                0x00011f7c                read_block
+                0x00011fb4                file_init
  *(.rodata)
- .rodata        0x00012244       0x68 kprintf.o
- .rodata        0x000122ac        0x7 disk.o
- *fill*         0x000122b3        0x1 
- .rodata        0x000122b4       0x98 file.o
+ .rodata        0x00012074       0x3b kernelc.o
+ *fill*         0x000120af        0x1 
+ .rodata        0x000120b0       0x68 kprintf.o
+ .rodata        0x00012118        0x7 disk.o
  *(.rdata)
  *(.rdata$zzz)
-                0x0001234c                etext = .
+                0x0001211f                etext = .
                 0x00013000                . = ALIGN (ABSOLUTE (.), 0x1000)
- *fill*         0x0001234c      0xcb4 
+ *fill*         0x0001211f      0xee1 
                 0x00013000                _sdata = .
                 0x00013000                sdata = .
  *(.data)
@@ -99,30 +96,30 @@ Linker script and memory map
  .bss           0x00017a0c        0x0 kprintf.o
  .bss           0x00017a0c        0x0 util.o
  .bss           0x00017a0c        0x0 disk.o
- .bss           0x00017a0c      0x8c0 file.o
-                0x000182cc                _ebss = .
-                0x000182cc                ebss = .
+ .bss           0x00017a0c        0x0 file.o
+                0x00017a0c                _ebss = .
+                0x00017a0c                ebss = .
 
-.glue_7         0x000182cc        0x0
- .glue_7        0x000182cc        0x0 linker stubs
+.glue_7         0x00017a0c        0x0
+ .glue_7        0x00017a0c        0x0 linker stubs
 
-.glue_7t        0x000182cc        0x0
- .glue_7t       0x000182cc        0x0 linker stubs
+.glue_7t        0x00017a0c        0x0
+ .glue_7t       0x00017a0c        0x0 linker stubs
 
-.vfp11_veneer   0x000182cc        0x0
- .vfp11_veneer  0x000182cc        0x0 linker stubs
+.vfp11_veneer   0x00017a0c        0x0
+ .vfp11_veneer  0x00017a0c        0x0 linker stubs
 
-.v4_bx          0x000182cc        0x0
- .v4_bx         0x000182cc        0x0 linker stubs
+.v4_bx          0x00017a0c        0x0
+ .v4_bx         0x00017a0c        0x0 linker stubs
 
-.iplt           0x000182cc        0x0
- .iplt          0x000182cc        0x0 kernelasm.o
+.iplt           0x00017a0c        0x0
+ .iplt          0x00017a0c        0x0 kernelasm.o
 
-.igot.plt       0x000182cc        0x0
- .igot.plt      0x000182cc        0x0 kernelasm.o
+.igot.plt       0x00017a0c        0x0
+ .igot.plt      0x00017a0c        0x0 kernelasm.o
 
-.rel.dyn        0x000182cc        0x0
- .rel.iplt      0x000182cc        0x0 kernelasm.o
+.rel.dyn        0x00017a0c        0x0
+ .rel.iplt      0x00017a0c        0x0 kernelasm.o
 
 /DISCARD/
  *(.eh_frame)

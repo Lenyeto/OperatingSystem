@@ -21,10 +21,6 @@ void kmemset(void* dest, unsigned char val, int num){
 }
 
 
-void memcpy(void* dest, void* src, int num){
-    kmemcpy(dest,src,num);
-}
-
 void kdivmod(unsigned n, unsigned d, unsigned*qp, unsigned*rp) {
 	int i;
 	int dividend = 0;

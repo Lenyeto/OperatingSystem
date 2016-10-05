@@ -5,7 +5,6 @@
 #pragma pack(push,1)
 
 #define MAX_FILES 16
-static File file_table[MAX_FILES];
 
 struct Superblock{
     unsigned inode_count;       //total # of inodes
@@ -80,6 +79,17 @@ struct Inode {
     char reserved[12];
 };
 
+
+struct File{
+    int in_use;
+    struct Inode inode;
+    int offset;
+    int flags; //0 = read, 1 = write, 2 = r/w
+};
+
+
+static struct File file_table[MAX_FILES];
+
 struct DirEntry{
     unsigned inode;
     unsigned short rec_len;
@@ -140,17 +150,16 @@ int file_open(char* fname, int flags) {
 			break;
 		}
 	}
-	
-	
+	return -SUCCESS;
 }
 
 int file_close(int fd) {
-	if (fd < 0 | fd >= MAX_FILES) {
+	if ((fd < 0) | (fd >= MAX_FILES)) {
 		return -EINVAL;
 	}
 	if (file_table[fd].in_use == 0) {
 		return -EINVAL;
 	}
 	file_table[fd].in_use = 0;
-	return SUCCESS;
+	return -SUCCESS;
 }

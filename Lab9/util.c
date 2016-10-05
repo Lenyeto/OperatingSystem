@@ -1,4 +1,4 @@
-
+#include "util.h"
 
 void kmemcpy(void* dest, void* src, int num){
     char* dp = (char*) dest;
@@ -25,7 +25,7 @@ void memcpy(void* dest, void* src, int num){
     kmemcpy(dest,src,num);
 }
 
-unsigned kdivmod(unsigned n, unsigned d, unsigned*qp, unsigned*rp) {
+void kdivmod(unsigned n, unsigned d, unsigned*qp, unsigned*rp) {
 	int i;
 	int dividend = 0;
 	int Q = 0;
@@ -37,10 +37,11 @@ unsigned kdivmod(unsigned n, unsigned d, unsigned*qp, unsigned*rp) {
 		n <<= 1; Q <<= 1;
 		if (dividend > d) {
 			Q |= 1;
-			dividend -= denominator;
+			dividend -= d;
 		}
 	}
-	*qp = Q; *rp = dividend;
+	*qp = Q;
+	*rp = dividend;
 }
 
 unsigned kdiv(unsigned n, unsigned d) {

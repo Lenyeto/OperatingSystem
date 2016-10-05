@@ -12,5 +12,8 @@ void kmain(){
     disk_init();
     file_init();
     while(1){
+		
     }
 }
+
+
